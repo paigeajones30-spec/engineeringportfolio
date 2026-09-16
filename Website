@@ -1,0 +1,336 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Paige Jones — Biomedical & Systems Engineering Portfolio showcasing hardware prototyping, signal processing, and medical device design." />
+  <title>Paige Jones — Engineering Portfolio</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f8f9fa;
+      --surface: #ffffff;
+      --surface-soft: #edf1f5;
+      --text: #1a202c;
+      --muted: #5a6578;
+      --line: #e2e8f0;
+      --accent: #1e56a0;
+      --accent-soft: #e6f0fa;
+      --focus: #1e56a0;
+      --shadow: 0 10px 25px rgba(15, 23, 42, .08);
+      --code-bg: #1e293b;
+      --code-text: #38bdf8;
+    }
+    [data-theme="dark"] {
+      color-scheme: dark;
+      --bg: #0f172a;
+      --surface: #1e293b;
+      --surface-soft: #334155;
+      --text: #f8fafc;
+      --muted: #94a3b8;
+      --line: #334155;
+      --accent: #38bdf8;
+      --accent-soft: #1e3a5f;
+      --focus: #38bdf8;
+      --shadow: 0 12px 30px rgba(0, 0, 0, .4);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "SF Pro Display", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+    }
+    a { color: inherit; }
+    a:focus-visible, button:focus-visible { outline: 3px solid var(--focus); outline-offset: 4px; }
+    .wrap { width: min(1140px, calc(100% - 48px)); margin: 0 auto; }
+    
+    /* Header & Nav */
+    header {
+      position: sticky; top: 0; z-index: 10;
+      background: color-mix(in srgb, var(--bg) 90%, transparent);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--line);
+    }
+    .nav { min-height: 72px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .brand { text-decoration: none; font-weight: 800; font-size: 18px; letter-spacing: -.02em; }
+    .brand span { color: var(--accent); }
+    .nav-links { display: flex; align-items: center; gap: 24px; }
+    .nav-links a { color: var(--muted); text-decoration: none; font-size: 14px; font-weight: 600; }
+    .nav-links a:hover { color: var(--text); }
+    .theme-toggle {
+      min-width: 40px; min-height: 40px; border-radius: 6px;
+      border: 1px solid var(--line); background: var(--surface);
+      color: var(--text); cursor: pointer; font-size: 16px;
+    }
+
+    /* Hero Section */
+    .hero { padding: 80px 0; }
+    .hero-grid { display: grid; grid-template-columns: 1.2fr .8fr; gap: 64px; align-items: center; }
+    .eyebrow { margin: 0 0 12px; color: var(--accent); font-size: 13px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+    h1 { margin-bottom: 20px; font-size: clamp(2.5rem, 5vw, 4.2rem); line-height: 1.08; letter-spacing: -.04em; font-weight: 800; }
+    .lede { margin-bottom: 32px; color: var(--muted); font-size: 1.15rem; }
+    .actions { display: flex; flex-wrap: wrap; gap: 12px; }
+    .button { display: inline-flex; align-items: center; justify-content: center; min-height: 46px; padding: 0 20px; border-radius: 6px; border: 1px solid var(--accent); background: var(--accent); color: #fff; text-decoration: none; font-weight: 600; font-size: 14px; transition: transform .2s ease; }
+    .button:hover { transform: translateY(-2px); }
+    .button.secondary { border-color: var(--line); background: var(--surface); color: var(--text); }
+
+    /* Technical Specs Box */
+    .tech-card { padding: 28px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); box-shadow: var(--shadow); }
+    .tech-card h3 { font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); margin-bottom: 16px; }
+    .skill-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+    .skill-tag { padding: 6px 12px; border-radius: 4px; background: var(--surface-soft); font-size: 13px; font-weight: 600; color: var(--text); border: 1px solid var(--line); }
+
+    /* Section Styling */
+    section { padding: 80px 0; border-top: 1px solid var(--line); }
+    .section-head { margin-bottom: 48px; }
+    .section-head h2 { font-size: clamp(2rem, 3.5vw, 2.8rem); letter-spacing: -.03em; margin-bottom: 8px; }
+    .section-head p { color: var(--muted); max-width: 540px; margin: 0; }
+
+    /* Project Cards & Case Studies */
+    .project-stack { display: flex; flex-direction: column; gap: 40px; }
+    .project-card { border: 1px solid var(--line); border-radius: 12px; background: var(--surface); overflow: hidden; display: grid; grid-template-columns: 1fr 1.2fr; gap: 0; box-shadow: var(--shadow); }
+    .project-visual { background: var(--code-bg); color: var(--code-text); padding: 32px; display: flex; flex-direction: column; justify-content: space-between; font-family: monospace; border-right: 1px solid var(--line); }
+    .visual-header { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: .1em; margin-bottom: 16px; }
+    .code-block { font-size: 13px; line-height: 1.6; white-space: pre-wrap; color: #e2e8f0; }
+    .project-body { padding: 36px; }
+    .project-body h3 { font-size: 22px; margin-bottom: 8px; letter-spacing: -.02em; }
+    .project-subtitle { font-size: 14px; color: var(--accent); font-weight: 700; margin-bottom: 16px; }
+    .project-body p { color: var(--muted); font-size: 15px; margin-bottom: 20px; }
+    
+    .spec-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px; padding: 16px; background: var(--surface-soft); border-radius: 8px; }
+    .spec-item { font-size: 13px; }
+    .spec-label { font-weight: 700; color: var(--text); display: block; }
+    .spec-value { color: var(--muted); }
+
+    /* About Section */
+    .about-grid { display: grid; grid-template-columns: .8fr 1.2fr; gap: 64px; }
+    .about-copy { color: var(--muted); font-size: 17px; }
+
+    /* Contact Box */
+    .contact-box { display: flex; justify-content: space-between; align-items: center; gap: 32px; padding: 48px; border-radius: 12px; background: var(--surface); border: 1px solid var(--line); box-shadow: var(--shadow); }
+    .contact-box h2 { margin-bottom: 8px; font-size: clamp(1.8rem, 3vw, 2.4rem); letter-spacing: -.03em; }
+
+    footer { padding: 32px 0; border-top: 1px solid var(--line); color: var(--muted); font-size: 13px; }
+    .footer-row { display: flex; justify-content: space-between; gap: 20px; }
+
+    @media (max-width: 850px) {
+      .hero-grid, .project-card, .about-grid { grid-template-columns: 1fr; }
+      .project-visual { border-right: none; border-bottom: 1px solid var(--line); }
+      .contact-box { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap nav">
+      <a class="brand" href="#top">Paige Jones<span>_BME</span></a>
+      <nav class="nav-links" aria-label="Main navigation">
+        <a href="#projects">Engineering Work</a>
+        <a href="#skills">Core Specs</a>
+        <a href="#about">Background</a>
+        <a href="#contact">Contact</a>
+        <button class="theme-toggle" type="button" aria-label="Toggle theme">☼</button>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div>
+          <p class="eyebrow">Biomedical & Systems Engineer</p>
+          <h1>Engineering solutions at the human interface.</h1>
+          <p class="lede">Specializing in biomedical signal processing, microcontroller hardware prototyping, and medical device systems engineering.</p>
+          <div class="actions">
+            <a class="button" href="#projects">View Case Studies ↓</a>
+            <a class="button secondary" href="#contact">Contact Engineer</a>
+          </div>
+        </div>
+        <div class="tech-card" id="skills">
+          <h3>Primary Technical Stack</h3>
+          <div class="skill-tags">
+            <span class="skill-tag">MATLAB</span>
+            <span class="skill-tag">Arduino / C++</span>
+            <span class="skill-tag">PPG Signal Analysis</span>
+            <span class="skill-tag">Circuit Design</span>
+            <span class="skill-tag">Black Box Modeling</span>
+            <span class="skill-tag">Morphological Matrices</span>
+            <span class="skill-tag">Sensors & Actuators</span>
+            <span class="skill-tag">Systems Architecture</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Engineering Projects -->
+    <section id="projects">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>Featured Case Studies</h2>
+          <p>Iterative engineering designs combining hardware prototyping, signal analysis, and clinical research methodologies.</p>
+        </div>
+
+        <div class="project-stack">
+          <!-- Project 1 -->
+          <article class="project-card">
+            <div class="project-visual">
+              <div class="visual-header">// System Block Diagram</div>
+              <div class="code-block">[EMG Inputs] ➔ [Bandpass Filter]
+                     ↓
+          [ADC Microcontroller]
+                     ↓
+       [Threshold Detection Engine]
+                     ↓
+      [Pulse Bio-Feedback Module]</div>
+            </div>
+            <div class="project-body">
+              <div class="project-subtitle">Medical Device Prototyping</div>
+              <h3>Masseter Muscle Bio-Feedback Device</h3>
+              <p>Conceptualized and engineered a nocturnal bruxism bio-feedback device focused on masseter muscle detection and low-latency stimulation response.</p>
+              
+              <div class="spec-grid">
+                <div class="spec-item">
+                  <span class="spec-label">Methodology:</span>
+                  <span class="spec-value">Black box models & Morphological matrices</span>
+                </div>
+                <div class="spec-item">
+                  <span class="spec-label">Focus Area:</span>
+                  <span class="spec-value">Systems Architecture & Hardware Design</span>
+                </div>
+              </div>
+
+              <div class="skill-tags">
+                <span class="skill-tag">Microcontrollers</span>
+                <span class="skill-tag">Systems Engineering</span>
+                <span class="skill-tag">Bio-Feedback</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Project 2 -->
+          <article class="project-card">
+            <div class="project-visual">
+              <div class="visual-header">// MATLAB Processing Pipeline</div>
+              <div class="code-block">% PPG Peak Detection
+d_raw = diff(ppg_signal);
+[peaks, locs] = findpeaks(d_raw, ...
+    'MinPeakHeight', threshold);
+BPM = (length(locs)/duration) * 60;</div>
+            </div>
+            <div class="project-body">
+              <div class="project-subtitle">Signal Processing & Embedded Systems</div>
+              <h3>PPG Waveform Analysis & Derivative Processing</h3>
+              <p>Designed a pulse oximeter data pipeline utilizing MATLAB and Arduino hardware to analyze photoplethysmogram (PPG) raw light intensity signals and calculate first-derivative metrics.</p>
+              
+              <div class="spec-grid">
+                <div class="spec-item">
+                  <span class="spec-label">Tools Used:</span>
+                  <span class="spec-value">MATLAB, Arduino, Optical Sensors</span>
+                </div>
+                <div class="spec-item">
+                  <span class="spec-label">Metric Target:</span>
+                  <span class="spec-value">Heart rate & derivative waveform extraction</span>
+                </div>
+              </div>
+
+              <div class="skill-tags">
+                <span class="skill-tag">MATLAB</span>
+                <span class="skill-tag">Arduino</span>
+                <span class="skill-tag">Signal Processing</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Project 3 -->
+          <article class="project-card">
+            <div class="project-visual">
+              <div class="visual-header">// Clinical Dataset & Metrics</div>
+              <div class="code-block">Dataset: High-Speed Athlete Cohort
+Target: Neurological Indicator Mapping
+Presented: Rocky Mountain Bioengineering
+Award: Chair's Award Recipient</div>
+            </div>
+            <div class="project-body">
+              <div class="project-subtitle">Bioengineering Research</div>
+              <h3>Neurological Impact Analysis in Sliding Sport Athletes</h3>
+              <p>Served as Co-Primary Investigator analyzing neurological conditions in high-speed sports athletes. Formulated data structures and presented findings at regional bioengineering symposia.</p>
+              
+              <div class="spec-grid">
+                <div class="spec-item">
+                  <span class="spec-label">Role:</span>
+                  <span class="spec-value">Co-Primary Investigator</span>
+                </div>
+                <div class="spec-item">
+                  <span class="spec-label">Recognition:</span>
+                  <span class="spec-value">Chair's Award Recipient</span>
+                </div>
+              </div>
+
+              <div class="skill-tags">
+                <span class="skill-tag">Biomedical Research</span>
+                <span class="skill-tag">Data Analysis</span>
+                <span class="skill-tag">Clinical Metrics</span>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+      <div class="wrap about-grid">
+        <h2>Engineering Background</h2>
+        <div class="about-copy">
+          <p>I hold a background in Biomedical Engineering with an emphasis on hands-on prototyping, sensor integration, and bio-signal interpretation.</p>
+          <p>My work combines mechanical statics, system architecture modeling, and embedded systems programming to build functional medical hardware and analytical frameworks.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+      <div class="wrap">
+        <div class="contact-box">
+          <div>
+            <h2>Let's discuss engineering projects.</h2>
+            <p style="color: var(--muted); margin: 0;">Open to technical collaborations, research inquiries, and hardware development.</p>
+          </div>
+          <a class="button" href="mailto:pjones@example.com">Contact Engineer ↗</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap footer-row">
+      <p>© <span id="year"></span> Paige Jones, B.S. Biomedical Engineering</p>
+      <p><a href="#top">Back to top ↑</a></p>
+    </div>
+  </footer>
+
+  <script>
+    const root = document.documentElement;
+    const toggle = document.querySelector('.theme-toggle');
+    const saved = localStorage.getItem('portfolio-theme');
+    if (saved === 'dark') root.dataset.theme = 'dark';
+    function updateToggle() {
+      const dark = root.dataset.theme === 'dark';
+      toggle.textContent = dark ? '☾' : '☼';
+    }
+    updateToggle();
+    toggle.addEventListener('click', () => {
+      const dark = root.dataset.theme === 'dark';
+      if (dark) delete root.dataset.theme; else root.dataset.theme = 'dark';
+      localStorage.setItem('portfolio-theme', dark ? 'light' : 'dark');
+      updateToggle();
+    });
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
